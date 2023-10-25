@@ -1,7 +1,7 @@
 function [rgb1, rgb2, depth1, depth2, R12, T12] = load_TUMRGBD_Sequence_Data_Pair_From_Img_Names ...
          (rgb_time_stamp, depth_time_stamp, rgb_filename, depth_filename, K, RGB_Img_Pair_Names, sequenceName)
     
-    dataset_Dir = "/home/chchien/datasets/TUM-RGBD/";
+    dataset_Dir = "/gpfs/data/bkimia/TUM-RGBD/";
     sequence_path = strcat(dataset_Dir, sequenceName);
 
     %> Find the corresponding indices for the image pair

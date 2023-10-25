@@ -1,7 +1,7 @@
 function [rgb_time_stamp, depth_time_stamp, rgb_filename, depth_filename] = ...
          get_TUMRGBD_rgb_depth_lists(sequenceName)
     
-    dataset_Dir = "/home/chchien/datasets/TUM-RGBD/";
+    dataset_Dir = "/gpfs/data/bkimia/TUM-RGBD/";
     sequence_path = strcat(dataset_Dir, sequenceName);
 
     imageList = strcat(sequence_path, '/rgb.txt');
