@@ -71,7 +71,7 @@ for i=1:numMatches
             rho1=transformed_pt1(3);
             rho2=point3D2(3);
             depth_proximity=2*abs(rho1-rho2)/(rho1+rho2);
-            if reprojection_error<tr && depth_proximity<tp
+            if reprojection_error<=tr && depth_proximity<=tp
                 inlier_list(i)=1;
             end
 
