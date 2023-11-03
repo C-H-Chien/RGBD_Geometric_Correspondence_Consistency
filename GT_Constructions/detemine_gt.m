@@ -1,6 +1,6 @@
 function [inlier_list]=detemine_gt(image1,image2,depth1,depth2,matchedPoints1,matchedPoints2,points3D1,points3D2,R12,t12,seq_Name)
-tr=10;
-tp=0.05;
+tr=8;
+tp=0.02;
 if contains(seq_Name, "freiburg1")
     fx = 517.3; fy = 516.5;
     cx = 318.6; cy = 239.5;
