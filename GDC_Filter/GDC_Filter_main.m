@@ -5,9 +5,9 @@ clear all;
 PARAMS.POINT_TO_CURVE_DIST_THRESH = 5;
 PARAMS.VISUALIZE_CURVES           = 1;
 
-PARAMS.DATASET_PATH              = "/home/chchien/datasets/ICL-NUIM/Noisy/"; %> Noise_Free, or Noisy
+PARAMS.DATASET_PATH              = "/home/chchien/datasets/ICL-NUIM/Noise_Free/"; %> Noise_Free, or Noisy
 PARAMS.SEQUENCE_NAME             = "living_room_traj0_frei_png/";
-PARAMS.VIEW1_INDX                = 1;
+PARAMS.VIEW1_INDX                = 5;
 PARAMS.VIEW2_INDX                = 10;
 
 if contains(PARAMS.DATASET_PATH, "Noisy")
@@ -101,25 +101,30 @@ Y2_m = (y2_m - cy) .* Z2_m / fy;
 matchedPoints3D_View2 = [X2_m, Y2_m, Z2_m];
 
 %> Set the 2D and 3D points of the two picked 2 matches, indexed by (2) and (3)
+picked_MatchedPoints2D_View1 = [matchedPoints1.Location(2,:); matchedPoints1.Location(3,:)];
 picked_MatchedPoints3D_View1 = [matchedPoints3D_View1(2,:); matchedPoints3D_View1(3,:)];
-picked_MatchedPoints2D_Views = [matchedPoints2.Location(2,:); matchedPoints2.Location(3,:)];
+picked_MatchedPoints2D_View2 = [matchedPoints2.Location(2,:); matchedPoints2.Location(3,:)];
 
 [is_Passed, B_final] = pass_GDC_Filter(PARAMS, anchor_Point3D_View1, picked_MatchedPoints3D_View1, ...
-                                       all_Points3D_View2, anchor_Point3D_View2, picked_MatchedPoints2D_Views);
+                                       all_Points3D_View2, anchor_Point3D_View2, picked_MatchedPoints2D_View2);
 
 %> Plot the 
 if PARAMS.VISUALIZE_CURVES
     figure;
     subplot(1,2,1);
     imshow(rgbImage1); hold on;
-    plot(anchor_Point2D_View1(1,1), anchor_Point2D_View1(1,2), 'bs', 'MarkerSize', 10, 'MarkerFaceColor', 'b');
+    plot(anchor_Point2D_View1(1,1), anchor_Point2D_View1(1,2), 'bs', 'MarkerSize', 10, 'MarkerFaceColor', 'b'); hold on;
+    plot(picked_MatchedPoints2D_View1(1,1), picked_MatchedPoints2D_View1(1,2), 'ms', 'MarkerSize', 10, 'MarkerFaceColor', 'm');
+    hold on;
+    plot(picked_MatchedPoints2D_View1(2,1), picked_MatchedPoints2D_View1(2,2), 'ys', 'MarkerSize', 10, 'MarkerFaceColor', 'y');
+    
     pause(0.3);
     subplot(1,2,2);
     imshow(rgbImage2); hold on;
     plot(anchor_Point2D_View2(1,1), anchor_Point2D_View2(1,2), 'bs', 'MarkerSize', 10, 'MarkerFaceColor', 'b');
     plot(B_final{1}(:,2), B_final{1}(:,1), 'c.', 'MarkerSize', 3); hold on;
-    plot(picked_MatchedPoints2D_Views(1,1), picked_MatchedPoints2D_Views(1,2), 'ms', 'MarkerSize', 10, 'MarkerFaceColor', 'm');
+    plot(picked_MatchedPoints2D_View2(1,1), picked_MatchedPoints2D_View2(1,2), 'ms', 'MarkerSize', 10, 'MarkerFaceColor', 'm');
     hold on;
     plot(B_final{2}(:,2), B_final{2}(:,1), 'g.', 'MarkerSize', 3); hold on;
-    plot(picked_MatchedPoints2D_Views(2,1), picked_MatchedPoints2D_Views(2,2), 'ys', 'MarkerSize', 10, 'MarkerFaceColor', 'y');
+    plot(picked_MatchedPoints2D_View2(2,1), picked_MatchedPoints2D_View2(2,2), 'ys', 'MarkerSize', 10, 'MarkerFaceColor', 'y');
 end

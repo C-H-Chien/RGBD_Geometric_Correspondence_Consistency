@@ -25,18 +25,12 @@ function [is_Passed, B_final] = pass_GDC_Filter(PARAMS, anchor_Point3D_View1, pi
         
         %> Search the boundaries of the binary mask
         B = bwboundaries(mask, "noholes");
-        
-        max_b_points = 0;
-        max_b_idx = 0;
-        for i = 1:size(B,1)
-            if size(B{i},1) > max_b_points
-                max_b_points = size(B{i},1);
-                max_b_idx = i;
-            end
+       
+        boundaryPoints = [];
+        for bi = 1:size(B, 1)
+            boundaryPoints = [boundaryPoints; [B{bi,1}(:,1), B{bi,1}(:,2)]];
         end
-
-        B_final{gi,1} = B{max_b_idx};
-        boundaryPoints = [B_final{gi,1}(:,1), B_final{gi,1}(:,2)];
+        B_final{gi,1} = boundaryPoints;
         
         x2 = picked_MatchedPoints2D_Views(gi,1);
         y2 = picked_MatchedPoints2D_Views(gi,2);
