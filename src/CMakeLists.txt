@@ -1,6 +1,5 @@
 
 set (control_sources
-        #lems_vo.cpp
         Frame.cpp
         Dataset.cpp
         Pipeline.cpp
@@ -8,9 +7,9 @@ set (control_sources
         MotionTracker.cpp
 )
 
-add_library( lems_vo_slam ${control_sources} )
+add_library( gcc_ransac ${control_sources} )
 
 #> Linking third-party libraries
-target_link_libraries(lems_vo_slam
+target_link_libraries(gcc_ransac
         ${THIRD_PARTY_LIBS})
 

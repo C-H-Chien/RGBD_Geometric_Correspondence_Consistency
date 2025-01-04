@@ -2,6 +2,6 @@ SET(TEST_SOURCES test_functions)
 
 FOREACH (test_src ${TEST_SOURCES})
     ADD_EXECUTABLE(${test_src} ${test_src}.cpp)
-    TARGET_LINK_LIBRARIES(${test_src} ${THIRD_PARTY_LIBS} lems_vo_slam)
+    TARGET_LINK_LIBRARIES(${test_src} ${THIRD_PARTY_LIBS} gcc_ransac)
     ADD_TEST(${test_src} ${test_src})
 ENDFOREACH (test_src)

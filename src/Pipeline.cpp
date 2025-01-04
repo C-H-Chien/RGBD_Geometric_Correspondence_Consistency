@@ -192,7 +192,7 @@ bool Pipeline::track_Camera_Motion() {
         std::cout << "- Translation:" << std::endl;
         std::cout << Camera_Motion_Estimate->Final_Rel_Transl << std::endl;
         double inlier_ratio = (double)(Camera_Motion_Estimate->Final_Num_Of_Inlier_Support) / (double)(Num_Of_Good_Feature_Matches);
-        std::cout << "Number of Supporting Inliers:" << Camera_Motion_Estimate->Final_Num_Of_Inlier_Support << "(" << inlier_ratio << "%)" << std::endl;
+        std::cout << "Number of Supporting Inliers:" << Camera_Motion_Estimate->Final_Num_Of_Inlier_Support << " (" << inlier_ratio*100 << "%)" << std::endl;
     }
     return true;
 }
